@@ -1,83 +1,75 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
 
-    {{-- En-tête + recherche --}}
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-        <div>
-            <h1 class="text-3xl font-bold text-gray-900">Nos prestations</h1>
-            <p class="mt-1 text-gray-500">Choisissez votre soin et réservez en quelques clics.</p>
-        </div>
-        <div class="relative w-full sm:w-72">
+    {{-- En-tête --}}
+    <div class="text-center max-w-xl mx-auto mb-8">
+        <span class="inline-block bg-ninich-blush-2 text-ninich-rose-dark font-semibold text-xs tracking-[0.15em] uppercase px-5 py-2 rounded-full mb-4">Notre catalogue</span>
+        <h1 class="font-serif text-4xl sm:text-5xl font-bold">Toutes nos prestations</h1>
+        <p class="mt-3 text-ninich-muted">Trouvez le soin idéal parmi notre sélection et réservez en quelques clics.</p>
+    </div>
+
+    {{-- Barre de recherche --}}
+    <div class="bg-white border border-ninich-line rounded-2xl p-4 shadow-ninich mb-4">
+        <div class="relative">
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-ninich-muted">🔍</span>
             <input type="text" wire:model.live.debounce.300ms="search"
-                   placeholder="Rechercher une prestation..."
-                   class="w-full rounded-full border-gray-300 pl-4 pr-10 py-2 shadow-sm focus:border-pink-500 focus:ring-pink-500">
-            <svg class="absolute right-3 top-2.5 h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
+                   placeholder="Rechercher une prestation…"
+                   class="w-full rounded-xl border-ninich-line bg-ninich-blush pl-11 pr-4 py-3 text-ninich-ink focus:border-ninich-rose focus:ring-ninich-rose">
         </div>
     </div>
+    <p class="text-sm text-ninich-muted mb-6 px-1"><b class="text-ninich-ink">{{ $prestations->total() }} prestation{{ $prestations->total() > 1 ? 's' : '' }}</b> trouvée{{ $prestations->total() > 1 ? 's' : '' }}</p>
 
     {{-- Grille de cartes --}}
     @if ($prestations->count())
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7">
             @foreach ($prestations as $prestation)
-                <div class="group bg-white rounded-2xl shadow-sm ring-1 ring-gray-100 overflow-hidden hover:shadow-lg transition">
-                    {{-- Image --}}
-                    <div class="h-44 bg-gradient-to-br from-pink-100 to-rose-200 flex items-center justify-center overflow-hidden">
+                <div class="group bg-white rounded-[22px] shadow-ninich border border-ninich-line overflow-hidden hover:shadow-ninich-lg transition">
+                    {{-- Image + badges --}}
+                    <div class="relative h-56 bg-ninich-blush-2 flex items-center justify-center overflow-hidden">
                         @if ($prestation->image)
                             <img src="{{ $prestation->image }}" alt="{{ $prestation->nom }}"
                                  class="h-full w-full object-cover group-hover:scale-105 transition">
                         @else
                             <span class="text-5xl">💅</span>
                         @endif
+                        @if ($prestation->avis_count > 0)
+                            <span class="absolute top-3.5 right-3.5 bg-ninich-ink/80 text-white text-xs font-semibold px-3 py-1.5 rounded-full">★ {{ number_format(round($prestation->avis_avg_note, 1), 1, ',', ' ') }}</span>
+                        @endif
                     </div>
 
-                    <div class="p-5">
-                        <h2 class="text-lg font-semibold text-gray-900">{{ $prestation->nom }}</h2>
+                    <div class="p-6">
+                        <h2 class="font-serif text-2xl font-bold text-ninich-ink">{{ $prestation->nom }}</h2>
 
-                        {{-- Note moyenne --}}
-                        @if ($prestation->avis_count > 0)
-                            @php $moyenne = round($prestation->avis_avg_note, 1); @endphp
-                            <div class="mt-1 flex items-center gap-1 text-sm">
-                                <span class="text-yellow-400">
-                                    {{ str_repeat('★', (int) round($moyenne)) }}<span class="text-gray-300">{{ str_repeat('★', 5 - (int) round($moyenne)) }}</span>
-                                </span>
-                                <span class="font-medium text-gray-700">{{ number_format($moyenne, 1, ',', ' ') }}</span>
-                                <span class="text-gray-400">({{ $prestation->avis_count }})</span>
-                            </div>
-                        @else
-                            <div class="mt-1 text-sm text-gray-400">Pas encore d'avis</div>
-                        @endif
+                        <p class="mt-2 text-sm text-ninich-muted line-clamp-2 min-h-[2.75rem]">{{ $prestation->description }}</p>
 
-                        <p class="mt-1 text-sm text-gray-500 line-clamp-2">{{ $prestation->description }}</p>
-
-                        <div class="mt-4 flex items-center justify-between text-sm">
-                            <span class="inline-flex items-center gap-1 text-gray-600">
-                                ⏱ {{ $prestation->duree }} min
-                            </span>
-                            <span class="text-lg font-bold text-pink-600">{{ number_format($prestation->prix, 2, ',', ' ') }} €</span>
+                        <div class="mt-4 flex items-center gap-4 text-[13px] text-ninich-muted">
+                            <span class="inline-flex items-center gap-1.5">⏱ {{ $prestation->duree }} min</span>
+                            <span class="inline-flex items-center gap-1.5">💬 {{ $prestation->avis_count > 0 ? $prestation->avis_count.' avis' : 'Pas encore d\'avis' }}</span>
                         </div>
 
-                        @auth
-                            <a href="{{ route('reservations.create', $prestation) }}" wire:navigate
-                               class="mt-4 block text-center rounded-full bg-pink-600 px-4 py-2 text-white font-medium hover:bg-pink-700 transition">
-                                Réserver
-                            </a>
-                        @else
-                            <a href="{{ route('login') }}" wire:navigate
-                               class="mt-4 block text-center rounded-full bg-gray-900 px-4 py-2 text-white font-medium hover:bg-gray-700 transition">
-                                Se connecter pour réserver
-                            </a>
-                        @endauth
+                        <div class="mt-5 flex items-center justify-between border-t border-ninich-line pt-4">
+                            <span class="font-serif text-2xl text-ninich-rose-dark">{{ number_format($prestation->prix, 2, ',', ' ') }} <small class="text-sm text-ninich-muted font-sans">€</small></span>
+                            @auth
+                                <a href="{{ route('reservations.create', $prestation) }}" wire:navigate
+                                   class="rounded-full bg-ninich-rose px-6 py-2.5 text-sm text-white font-semibold shadow-lg shadow-ninich-rose/30 hover:bg-ninich-rose-dark transition">
+                                    Réserver
+                                </a>
+                            @else
+                                <a href="{{ route('login') }}" wire:navigate
+                                   class="rounded-full bg-ninich-ink px-6 py-2.5 text-sm text-white font-semibold hover:bg-ninich-rose-dark transition">
+                                    Se connecter
+                                </a>
+                            @endauth
+                        </div>
                     </div>
                 </div>
             @endforeach
         </div>
 
-        <div class="mt-8">
+        <div class="mt-10">
             {{ $prestations->links() }}
         </div>
     @else
-        <div class="text-center py-20 text-gray-400">
+        <div class="text-center py-20 text-ninich-muted">
             Aucune prestation trouvée.
         </div>
     @endif

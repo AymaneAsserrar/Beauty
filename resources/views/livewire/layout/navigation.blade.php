@@ -16,14 +16,14 @@ new class extends Component
     }
 }; ?>
 
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
+<nav x-data="{ open: false }" class="bg-ninich-blush/90 backdrop-blur border-b border-ninich-line">
     {{-- Barre de navigation principale (bureau) --}}
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+        <div class="flex justify-between h-20">
             <div class="flex">
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('welcome') }}" wire:navigate class="text-xl font-bold text-pink-600">
-                        Ninich&nbsp;Beauty
+                    <a href="{{ route('welcome') }}" wire:navigate class="font-serif text-2xl font-bold text-ninich-ink">
+                        Ninich<span class="text-ninich-rose">Beauty</span>
                     </a>
                 </div>
 
@@ -54,8 +54,8 @@ new class extends Component
             {{-- Menu compte : connexion/inscription ou profil/déconnexion --}}
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 @guest
-                    <a href="{{ route('login') }}" wire:navigate class="text-sm text-gray-600 hover:text-gray-900 me-4">Connexion</a>
-                    <a href="{{ route('register') }}" wire:navigate class="rounded-full bg-pink-600 px-4 py-2 text-sm text-white font-medium hover:bg-pink-700">Inscription</a>
+                    <a href="{{ route('login') }}" wire:navigate class="text-sm font-medium text-ninich-muted hover:text-ninich-ink me-4">Connexion</a>
+                    <a href="{{ route('register') }}" wire:navigate class="rounded-full bg-ninich-rose px-5 py-2.5 text-sm text-white font-semibold shadow-lg shadow-ninich-rose/30 hover:bg-ninich-rose-dark transition">Inscription</a>
                 @endguest
 
                 @auth

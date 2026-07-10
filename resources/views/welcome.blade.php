@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,150 +8,238 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <style>
-        body { margin: 0; background: #fffaf9; }
-        * { box-sizing: border-box; }
-        .nb-link { color: #b3186f; text-decoration: none; }
-        .nb-link:hover { color: #8f1259; }
-
-        .nb-page   { font-family: 'Work Sans', sans-serif; background: #fffaf9; color: #241419; min-height: 100vh; }
-        .nb-nav    { position: relative; display: flex; align-items: center; justify-content: space-between; padding: 28px 64px; }
-        .nb-brand  { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 22px; letter-spacing: -0.02em; color: #b3186f; }
-        .nb-navlinks { display: flex; align-items: center; gap: 28px; }
-        .nb-navlink { font-size: 15px; font-weight: 500; color: #3a2a30; text-decoration: none; }
-        .nb-navlink:hover { color: #b3186f; }
-        .nb-btn-primary { background: #b3186f; color: #fff; padding: 11px 22px; border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none; }
-        .nb-btn-primary:hover { background: #8f1259; color: #fff; }
-
-        .nb-hero   { position: relative; overflow: hidden; background: linear-gradient(155deg, #fff0f4 0%, #fef7f3 45%, #fffaf9 100%); }
-        .nb-blob-1 { position: absolute; top: -180px; right: -160px; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, oklch(0.88 0.07 350), oklch(0.94 0.03 350) 70%, transparent 100%); opacity: 0.7; }
-        .nb-blob-2 { position: absolute; bottom: -220px; left: -140px; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle at 60% 40%, oklch(0.9 0.06 20), transparent 75%); opacity: 0.6; }
-
-        .nb-hero-inner { position: relative; max-width: 860px; margin: 0 auto; text-align: center; padding: 70px 32px 96px; }
-        .nb-badge  { display: inline-flex; align-items: center; gap: 8px; background: #ffffffb0; border: 1px solid #f4c9dc; padding: 7px 16px; border-radius: 999px; font-size: 13px; font-weight: 600; color: #b3186f; margin-bottom: 28px; }
-        .nb-title  { font-family: 'Sora', sans-serif; font-size: 60px; line-height: 1.08; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 22px; color: #241419; }
-        .nb-title span { color: #b3186f; }
-        .nb-lead   { font-size: 18px; line-height: 1.6; color: #5c4a50; max-width: 560px; margin: 0 auto 36px; }
-        .nb-cta-row { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-        .nb-cta-primary { background: #b3186f; color: #fff; padding: 16px 32px; border-radius: 999px; font-size: 16px; font-weight: 600; box-shadow: 0 12px 28px -8px #b3186f66; text-decoration: none; }
-        .nb-cta-primary:hover { background: #8f1259; color: #fff; }
-        .nb-cta-secondary { background: #ffffff; color: #3a2a30; border: 1px solid #ecdadf; padding: 16px 32px; border-radius: 999px; font-size: 16px; font-weight: 600; text-decoration: none; }
-        .nb-cta-secondary:hover { border-color: #b3186f; color: #b3186f; }
-
-        .nb-features { max-width: 1180px; margin: 0 auto; padding: 88px 32px 100px; }
-        .nb-grid   { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
-        .nb-card   { display: flex; flex-direction: column; gap: 20px; }
-        .nb-card-img { width: 100%; aspect-ratio: 4/3; border-radius: 20px; overflow: hidden; background: repeating-linear-gradient(135deg, #fbe4ec, #fbe4ec 10px, #f6d3e0 10px, #f6d3e0 20px); display: flex; align-items: center; justify-content: center; }
-        .nb-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .nb-card-tag { font-family: monospace; font-size: 12px; color: #9a4f6b; background: #ffffffcc; padding: 4px 10px; border-radius: 6px; }
-        .nb-card-title { font-family: 'Sora', sans-serif; font-size: 19px; font-weight: 700; margin: 0 0 8px; color: #241419; }
-        .nb-card-text  { font-size: 15px; line-height: 1.55; color: #6b5a5f; margin: 0; }
-
-        .nb-footer { border-top: 1px solid #f3e4e8; padding: 32px; text-align: center; }
-        .nb-footer p { font-size: 13px; color: #9a8a8f; margin: 0; }
-
-        @media (max-width: 860px) {
-            .nb-nav { padding: 20px 24px; }
-            .nb-navlinks { gap: 16px; }
-            .nb-hero-inner { padding: 48px 24px 72px; }
-            .nb-title { font-size: 40px; }
-            .nb-lead { font-size: 16px; }
-            .nb-features { padding: 56px 24px 72px; }
-            .nb-grid { grid-template-columns: 1fr; gap: 28px; }
-        }
-    </style>
 </head>
-<body>
 
-<div class="nb-page">
+<body class="font-sans text-ninich-ink bg-ninich-blush antialiased">
 
-    {{-- Hero --}}
-    <div class="nb-hero">
-        <div class="nb-blob-1"></div>
-        <div class="nb-blob-2"></div>
-
-        <nav class="nb-nav">
-            <div class="nb-brand">Ninich Beauty</div>
-            <div class="nb-navlinks">
-                <a href="{{ route('prestations.index') }}" class="nb-navlink">Prestations</a>
+    {{-- NAV --}}
+    <nav class="bg-ninich-blush/90 backdrop-blur border-b border-ninich-line">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
+            <div class="font-serif text-2xl font-bold">Ninich<span class="text-ninich-rose">Beauty</span></div>
+            <div class="hidden md:flex items-center gap-9 text-[15px] font-medium text-ninich-muted">
+                <a href="{{ route('welcome') }}" class="text-ninich-ink font-semibold">Accueil</a>
+                <a href="{{ route('prestations.index') }}" class="hover:text-ninich-ink">Prestations</a>
+                <a href="#etapes" class="hover:text-ninich-ink">Comment ça marche</a>
+            </div>
+            <div class="flex items-center gap-4">
                 @auth
-                    <a href="{{ route('dashboard') }}" class="nb-btn-primary">Mon espace</a>
+                    <a href="{{ route('dashboard') }}"
+                        class="rounded-full bg-ninich-rose px-6 py-2.5 text-sm text-white font-semibold shadow-lg shadow-ninich-rose/30 hover:bg-ninich-rose-dark transition">Mon
+                        espace</a>
                 @else
-                    <a href="{{ route('login') }}" class="nb-navlink">Connexion</a>
-                    <a href="{{ route('register') }}" class="nb-btn-primary">Inscription</a>
+                    <a href="{{ route('login') }}" class="text-[15px] font-semibold hover:text-ninich-rose">Connexion</a>
+                    <a href="{{ route('register') }}"
+                        class="rounded-full bg-ninich-rose px-6 py-2.5 text-sm text-white font-semibold shadow-lg shadow-ninich-rose/30 hover:bg-ninich-rose-dark transition">Inscription</a>
                 @endauth
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <div class="nb-hero-inner">
-            <div class="nb-badge">
-                Nouveau · Réservation en ligne 24h/24
+    {{-- HERO --}}
+    <header class="max-w-7xl mx-auto px-6 lg:px-10 py-16 lg:py-20">
+        <div class="flex flex-col lg:flex-row items-center gap-14">
+            <div class="flex-1">
+                <span
+                    class="inline-block bg-ninich-blush-2 text-ninich-rose-dark font-semibold text-xs tracking-[0.15em] uppercase px-5 py-2 rounded-full mb-6">Institut
+                    de beauté · Réservation en ligne</span>
+                <h1 class="font-serif text-5xl lg:text-6xl font-bold leading-[1.1] mb-6">Révélez votre <em
+                        class="italic text-ninich-rose">éclat</em> naturel en quelques clics</h1>
+                <p class="text-lg text-ninich-muted leading-relaxed max-w-md mb-9">Découvrez notre catalogue de soins et
+                    réservez votre rendez-vous avec nos expertes, en toute simplicité et à l'heure qui vous convient.
+                </p>
+                <div class="flex flex-wrap gap-4 mb-10">
+                    <a href="{{ route('prestations.index') }}"
+                        class="inline-flex items-center justify-center rounded-full bg-ninich-rose px-8 py-4 text-white font-semibold shadow-xl shadow-ninich-rose/30 hover:bg-ninich-rose-dark transition">Découvrir
+                        les prestations</a>
+                    <a href="#etapes"
+                        class="inline-flex items-center justify-center gap-2 rounded-full bg-transparent border-[1.5px] border-ninich-line px-8 py-4 font-semibold hover:border-ninich-rose transition">▶
+                        Comment ça marche</a>
+                </div>
+                <div class="flex gap-11">
+                    <div><b class="font-serif text-3xl text-ninich-rose-dark block">6+</b><span
+                            class="text-[13px] text-ninich-muted">Prestations</span></div>
+                    <div><b class="font-serif text-3xl text-ninich-rose-dark block">2</b><span
+                            class="text-[13px] text-ninich-muted">Expertes certifiées</span></div>
+                    <div><b class="font-serif text-3xl text-ninich-rose-dark block">4.9★</b><span
+                            class="text-[13px] text-ninich-muted">Note moyenne</span></div>
+                </div>
             </div>
-            <h1 class="nb-title">
-                Votre beauté,<br><span>réservée en un clic</span>
-            </h1>
-            <p class="nb-lead">
-                Fini la prise de rendez-vous par téléphone. Consultez nos prestations,
-                choisissez votre créneau et réservez en ligne, où que vous soyez.
+            <div class="flex-1 relative w-full">
+                <img class="rounded-[28px] shadow-ninich-lg h-[520px] w-full object-cover"
+                    src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80&auto=format&fit=crop"
+                    alt="Salon de beauté">
+                <div
+                    class="absolute left-2 -bottom-5 lg:-left-6 lg:bottom-10 bg-white rounded-2xl px-5 py-4 shadow-ninich-lg flex items-center gap-4">
+                    <div class="w-11 h-11 rounded-xl bg-ninich-blush-2 flex items-center justify-center text-xl">💆‍♀️
+                    </div>
+                    <div><b class="text-[15px] block">Prochain créneau</b><span
+                            class="text-xs text-ninich-muted">Aujourd'hui · 14h30 disponible</span></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    {{-- SERVICES --}}
+    <section class="max-w-7xl mx-auto px-6 lg:px-10 py-20">
+        <div class="text-center max-w-xl mx-auto mb-14">
+            <span
+                class="inline-block bg-ninich-blush-2 text-ninich-rose-dark font-semibold text-xs tracking-[0.15em] uppercase px-5 py-2 rounded-full mb-4">Nos
+                soins</span>
+            <h2 class="font-serif text-4xl font-bold mb-3">Des prestations pensées pour vous</h2>
+            <p class="text-ninich-muted">Manucure, soins du visage, maquillage… choisissez le soin qui vous ressemble.
             </p>
-            <div class="nb-cta-row">
-                <a href="{{ route('prestations.index') }}" class="nb-cta-primary">Découvrir les prestations</a>
-                @guest
-                    <a href="{{ route('register') }}" class="nb-cta-secondary">Créer un compte</a>
-                @endguest
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+            @php
+                $vitrine = [
+                    [
+                        't' => 'Ongles',
+                        'n' => 'Manucure gel',
+                        'd' => 'Pose de vernis semi-permanent longue tenue pour des mains impeccables.',
+                        'p' => '250',
+                        'du' => '60',
+                        'img' => 'photo-1604654894610-df63bc536371',
+                    ],
+                    [
+                        't' => 'Visage',
+                        'n' => 'Soin du visage',
+                        'd' => 'Nettoyage, gommage et masque hydratant pour une peau éclatante.',
+                        'p' => '350',
+                        'du' => '75',
+                        'img' => 'photo-1570172619644-dfd03ed5d881',
+                    ],
+                    [
+                        't' => 'Maquillage',
+                        'n' => 'Maquillage soirée',
+                        'd' => 'Maquillage professionnel sublimant pour tous vos événements.',
+                        'p' => '300',
+                        'du' => '45',
+                        'img' => 'photo-1487412720507-e7ab37603c6f',
+                    ],
+                ];
+            @endphp
+            @foreach ($vitrine as $s)
+                <div class="bg-white rounded-[22px] overflow-hidden shadow-ninich border border-ninich-line">
+                    <img class="h-52 w-full object-cover"
+                        src="https://images.unsplash.com/{{ $s['img'] }}?w=800&q=80&auto=format&fit=crop"
+                        alt="{{ $s['n'] }}">
+                    <div class="p-6">
+                        <span
+                            class="text-xs text-ninich-gold font-semibold tracking-wider uppercase">{{ $s['t'] }}</span>
+                        <h3 class="font-serif text-2xl font-bold my-2">{{ $s['n'] }}</h3>
+                        <p class="text-sm text-ninich-muted leading-relaxed mb-5">{{ $s['d'] }}</p>
+                        <div class="flex items-center justify-between border-t border-ninich-line pt-4">
+                            <span class="font-serif text-2xl text-ninich-rose-dark">{{ $s['p'] }} <small
+                                    class="text-[13px] text-ninich-muted font-sans">€</small></span>
+                            <span class="text-[13px] text-ninich-muted">⏱ {{ $s['du'] }} min</span>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <div class="text-center mt-12">
+            <a href="{{ route('prestations.index') }}"
+                class="inline-flex items-center justify-center rounded-full bg-ninich-rose px-8 py-4 text-white font-semibold shadow-xl shadow-ninich-rose/30 hover:bg-ninich-rose-dark transition">Voir
+                tout le catalogue</a>
+        </div>
+    </section>
+
+    {{-- STEPS --}}
+    <section id="etapes" class="bg-ninich-blush-2 py-20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10">
+            <div class="text-center max-w-xl mx-auto mb-14">
+                <span
+                    class="inline-block bg-white text-ninich-rose-dark font-semibold text-xs tracking-[0.15em] uppercase px-5 py-2 rounded-full mb-4">Simple
+                    &amp; rapide</span>
+                <h2 class="font-serif text-4xl font-bold">Réservez en 3 étapes</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center px-3">
+                    <div
+                        class="w-16 h-16 rounded-full bg-white text-ninich-rose font-serif text-2xl font-bold flex items-center justify-center mx-auto mb-5 shadow-ninich-lg">
+                        1</div>
+                    <h3 class="font-serif text-xl font-bold mb-2">Choisissez un soin</h3>
+                    <p class="text-sm text-ninich-muted leading-relaxed">Parcourez le catalogue et sélectionnez la
+                        prestation qui vous convient.</p>
+                </div>
+                <div class="text-center px-3">
+                    <div
+                        class="w-16 h-16 rounded-full bg-white text-ninich-rose font-serif text-2xl font-bold flex items-center justify-center mx-auto mb-5 shadow-ninich-lg">
+                        2</div>
+                    <h3 class="font-serif text-xl font-bold mb-2">Sélectionnez un créneau</h3>
+                    <p class="text-sm text-ninich-muted leading-relaxed">Choisissez votre experte, la date et l'horaire
+                        disponible.</p>
+                </div>
+                <div class="text-center px-3">
+                    <div
+                        class="w-16 h-16 rounded-full bg-white text-ninich-rose font-serif text-2xl font-bold flex items-center justify-center mx-auto mb-5 shadow-ninich-lg">
+                        3</div>
+                    <h3 class="font-serif text-xl font-bold mb-2">Confirmez</h3>
+                    <p class="text-sm text-ninich-muted leading-relaxed">Validez votre rendez-vous et recevez votre
+                        confirmation.</p>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    {{-- Features --}}
-    <div class="nb-features">
-        <div class="nb-grid">
-
-            <div class="nb-card">
-                <div class="nb-card-img">
-                    <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800&q=80&auto=format&fit=crop"
-                         alt="Manucure et nail art" loading="lazy">
-                </div>
-                <div>
-                    <h3 class="nb-card-title">Des prestations variées</h3>
-                    <p class="nb-card-text">Manucure, soins, coiffure... trouvez le soin qu'il vous faut.</p>
-                </div>
-            </div>
-
-            <div class="nb-card">
-                <div class="nb-card-img">
-                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&q=80&auto=format&fit=crop"
-                         alt="Réservation en ligne" loading="lazy">
-                </div>
-                <div>
-                    <h3 class="nb-card-title">Réservation instantanée</h3>
-                    <p class="nb-card-text">Choisissez votre prestataire, votre date et votre heure.</p>
-                </div>
-            </div>
-
-            <div class="nb-card">
-                <div class="nb-card-img">
-                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800&q=80&auto=format&fit=crop"
-                         alt="Espace client détente" loading="lazy">
-                </div>
-                <div>
-                    <h3 class="nb-card-title">Simple et flexible</h3>
-                    <p class="nb-card-text">Gérez et annulez vos rendez-vous depuis votre espace.</p>
-                </div>
-            </div>
-
+    {{-- CTA --}}
+    <section class="max-w-7xl mx-auto px-6 lg:px-10 py-20">
+        <div
+            class="rounded-[32px] bg-gradient-to-br from-ninich-rose to-ninich-rose-dark px-8 lg:px-16 py-16 text-center text-white">
+            <h2 class="font-serif text-4xl font-bold mb-4">Prête à prendre soin de vous ?</h2>
+            <p class="opacity-90 text-lg mb-8 max-w-lg mx-auto">Créez votre compte gratuitement et réservez votre
+                premier rendez-vous dès aujourd'hui.</p>
+            @auth
+                <a href="{{ route('prestations.index') }}"
+                    class="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-ninich-rose-dark font-semibold hover:bg-ninich-blush transition">Réserver
+                    maintenant</a>
+            @else
+                <a href="{{ route('register') }}"
+                    class="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-ninich-rose-dark font-semibold hover:bg-ninich-blush transition">Créer
+                    un compte</a>
+            @endauth
         </div>
-    </div>
+    </section>
 
-    <div class="nb-footer">
-        <p>© {{ date('Y') }} Ninich Beauty. Tous droits réservés.</p>
-    </div>
-
-</div>
+    {{-- FOOTER --}}
+    <footer class="bg-ninich-ink text-ninich-line pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6 lg:px-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-10">
+                <div class="col-span-2 md:col-span-1">
+                    <div class="font-serif text-2xl text-white mb-3">Ninich Beauty</div>
+                    <p class="text-[#C6ADA9] text-sm leading-relaxed">Institut de beauté &amp; plateforme de
+                        réservation en ligne. Prenez soin de vous, où que vous soyez.</p>
+                </div>
+                <div>
+                    <h4 class="font-serif text-white mb-4">Navigation</h4>
+                    <a href="{{ route('welcome') }}"
+                        class="block text-[#C6ADA9] text-sm mb-2.5 hover:text-white">Accueil</a>
+                    <a href="{{ route('prestations.index') }}"
+                        class="block text-[#C6ADA9] text-sm mb-2.5 hover:text-white">Prestations</a>
+                </div>
+                <div>
+                    <h4 class="font-serif text-white mb-4">Compte</h4>
+                    <a href="{{ route('login') }}"
+                        class="block text-[#C6ADA9] text-sm mb-2.5 hover:text-white">Connexion</a>
+                    <a href="{{ route('register') }}"
+                        class="block text-[#C6ADA9] text-sm mb-2.5 hover:text-white">Inscription</a>
+                </div>
+                <div>
+                    <h4 class="font-serif text-white mb-4">Contact</h4>
+                    <p class="text-[#C6ADA9] text-sm mb-2.5">Paris, France</p>
+                    <p class="text-[#C6ADA9] text-sm mb-2.5">contact@ninich.test</p>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-6 text-center text-[#9C8480] text-[13px]">© {{ date('Y') }}
+                Ninich Beauty — Tous droits réservés.</div>
+        </div>
+    </footer>
 
 </body>
+
 </html>

@@ -8,27 +8,28 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         {{-- Polices --}}
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
         {{-- Scripts (CSS + JS compilés par Vite) --}}
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col justify-center items-center px-4 py-10 bg-gradient-to-br from-rose-50 via-white to-pink-100">
+    <body class="font-sans text-ninich-ink antialiased">
+        <div class="min-h-screen flex flex-col justify-center items-center px-4 py-10 bg-gradient-to-br from-ninich-blush-2 via-ninich-blush to-ninich-blush-2">
 
             {{-- Logo / marque --}}
             <a href="/" wire:navigate class="flex flex-col items-center mb-6">
                 <span class="text-3xl">💅</span>
-                <span class="mt-1 text-2xl font-bold text-pink-600">Ninich Beauty</span>
+                <span class="mt-1 font-serif text-2xl font-bold text-ninich-ink">Ninich<span class="text-ninich-rose">Beauty</span></span>
             </a>
 
             {{-- Carte du formulaire --}}
-            <div class="w-full sm:max-w-md px-6 py-8 bg-white shadow-xl ring-1 ring-pink-100 rounded-2xl">
+            <div class="w-full sm:max-w-md px-6 py-8 bg-white shadow-ninich-lg ring-1 ring-ninich-line rounded-[22px]">
                 {{ $slot }}
             </div>
 
-            <p class="mt-6 text-sm text-gray-400">
+            <p class="mt-6 text-sm text-ninich-muted">
                 © {{ date('Y') }} Ninich Beauty — Réservez votre beauté en ligne.
             </p>
         </div>
