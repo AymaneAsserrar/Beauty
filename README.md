@@ -48,9 +48,11 @@ Remarque : le projet fonctionne sous Laravel 12, qui requiert PHP 8.2. Pour une 
 ## Fonctionnalités
 
 - Authentification complète (inscription, connexion, gestion du profil) via Laravel Breeze.
-- Catalogue des prestations présenté sous forme de cartes, avec recherche en temps réel.
+- Catalogue des prestations présenté sous forme de cartes illustrées d'une photo, avec recherche en temps réel.
+- Photos des prestations : chaque prestation peut porter une image mise en avant dans le catalogue et sur sa fiche.
 - Tunnel de réservation (composant Livewire) : sélection de la prestation, du prestataire, de la date et d'un créneau horaire.
 - Créneaux calculés dynamiquement : les heures déjà réservées ou passées sont automatiquement désactivées, en tenant compte de la durée de la prestation.
+- Système d'avis et de notes : après une prestation terminée, la cliente laisse une note (1 à 5 étoiles) et un commentaire. La note moyenne et le nombre d'avis sont affichés sur chaque prestation.
 - Tableaux de bord adaptés au rôle de l'utilisateur connecté.
 - Annulation d'une réservation par le client.
 - Protection des routes par un middleware de rôle.
@@ -61,7 +63,7 @@ Remarque : le projet fonctionne sous Laravel 12, qui requiert PHP 8.2. Pour une 
 
 | Rôle | Droits |
 |------|--------|
-| Client | S'inscrire, se connecter, consulter les prestations, réserver un créneau, consulter et annuler ses réservations. |
+| Client | S'inscrire, se connecter, consulter les prestations et leurs avis, réserver un créneau, consulter et annuler ses réservations, laisser un avis sur une prestation terminée. |
 | Prestataire | Consulter uniquement les rendez-vous qui lui sont attribués, les confirmer ou les marquer comme terminés. |
 | Administrateur | Gestion complète (création, modification, suppression) des prestations, gestion des utilisateurs, consultation de toutes les réservations et modification de leur statut. |
 
@@ -183,6 +185,7 @@ En production, le mode développement n'est pas nécessaire : les assets sont co
    - sélectionnez un créneau disponible (les créneaux occupés ou passés sont désactivés),
    - ajoutez une remarque si nécessaire, puis confirmez.
 4. Retrouvez vos rendez-vous dans la page Mes réservations, où vous pouvez annuler un rendez-vous à venir.
+5. Une fois un rendez-vous marqué comme terminé, laissez un avis (note de 1 à 5 étoiles et commentaire) sur la prestation ; cet avis apparaît alors sur la fiche de la prestation.
 
 ### Prestataire
 
@@ -193,7 +196,7 @@ En production, le mode développement n'est pas nécessaire : les assets sont co
 ### Administrateur
 
 1. Connectez-vous (admin@ninich.test / password).
-2. Prestations : ajoutez, modifiez, supprimez ou masquez des prestations.
+2. Prestations : ajoutez, modifiez, supprimez ou masquez des prestations, et associez-leur une photo.
 3. Réservations : consultez l'ensemble des réservations et modifiez leur statut.
 4. Utilisateurs : créez, modifiez ou supprimez des comptes et attribuez les rôles (client, prestataire, admin).
 
@@ -214,6 +217,7 @@ app/
     ListPrestations.php           Catalogue et recherche
     BookAppointment.php           Tunnel de réservation (créneaux dynamiques)
     ClientReservations.php        Réservations du client et annulation
+    LeaveReview.php               Dépôt d'un avis (note + commentaire)
     Admin/
       PrestationManager.php       Gestion des prestations
       ReservationList.php         Toutes les réservations et leur statut
@@ -222,8 +226,9 @@ app/
       AgendaList.php              Rendez-vous attribués au prestataire
   Models/
     User.php                      Rôles et relations
-    Prestation.php
+    Prestation.php                Prestation, photo, note moyenne et avis
     Reservation.php
+    Avis.php                      Avis client (note + commentaire)
 
 resources/views/
   welcome.blade.php               Page d'accueil
@@ -282,6 +287,18 @@ Route::middleware('role:admin,prestataire')->group(function () { /* ... */ });
 | notes | text, nullable | Remarque du client |
 
 Une contrainte d'unicité sur le couple (`prestataire_id`, `date_heure`) empêche la double réservation d'un même prestataire sur un même créneau.
+
+### Table `avis`
+
+| Colonne | Type | Description |
+|---------|------|-------------|
+| reservation_id | clé étrangère vers reservations (unique) | La réservation terminée à l'origine de l'avis (un seul avis par réservation) |
+| client_id | clé étrangère vers users | Le client auteur de l'avis |
+| prestation_id | clé étrangère vers prestations | La prestation notée |
+| note | tinyint (unsigned) | Note de 1 à 5 étoiles |
+| commentaire | text, nullable | Commentaire du client |
+
+La contrainte d'unicité sur `reservation_id` garantit qu'un client ne peut déposer qu'un seul avis par réservation. Toutes les clés étrangères sont supprimées en cascade.
 
 ### Réinitialiser la base de données
 
