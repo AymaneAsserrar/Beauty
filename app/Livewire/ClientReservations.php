@@ -28,7 +28,7 @@ class ClientReservations extends Component
 
     public function render()
     {
-        $reservations = Reservation::with(['prestation', 'prestataire'])
+        $reservations = Reservation::with(['prestation', 'prestataire', 'avis'])
             ->where('client_id', auth()->id())
             ->orderByDesc('date_heure')
             ->get();

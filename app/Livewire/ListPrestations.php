@@ -24,6 +24,8 @@ class ListPrestations extends Component
     public function render()
     {
         $prestations = Prestation::active()
+            ->withCount('avis')
+            ->withAvg('avis', 'note')
             ->when($this->search, function ($query) {
                 $query->where('nom', 'like', "%{$this->search}%")
                       ->orWhere('description', 'like', "%{$this->search}%");

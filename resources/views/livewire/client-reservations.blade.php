@@ -53,6 +53,9 @@
                         Annuler
                     </button>
                 @endif
+
+                {{-- Avis : disponible sur les réservations terminées. --}}
+                @livewire('leave-review', ['reservation' => $reservation], key('avis-'.$reservation->id))
             </div>
         </div>
     @empty

@@ -33,6 +33,21 @@
 
                     <div class="p-5">
                         <h2 class="text-lg font-semibold text-gray-900">{{ $prestation->nom }}</h2>
+
+                        {{-- Note moyenne --}}
+                        @if ($prestation->avis_count > 0)
+                            @php $moyenne = round($prestation->avis_avg_note, 1); @endphp
+                            <div class="mt-1 flex items-center gap-1 text-sm">
+                                <span class="text-yellow-400">
+                                    {{ str_repeat('★', (int) round($moyenne)) }}<span class="text-gray-300">{{ str_repeat('★', 5 - (int) round($moyenne)) }}</span>
+                                </span>
+                                <span class="font-medium text-gray-700">{{ number_format($moyenne, 1, ',', ' ') }}</span>
+                                <span class="text-gray-400">({{ $prestation->avis_count }})</span>
+                            </div>
+                        @else
+                            <div class="mt-1 text-sm text-gray-400">Pas encore d'avis</div>
+                        @endif
+
                         <p class="mt-1 text-sm text-gray-500 line-clamp-2">{{ $prestation->description }}</p>
 
                         <div class="mt-4 flex items-center justify-between text-sm">

@@ -41,4 +41,35 @@ class Prestation extends Model
     {
         return $this->hasMany(Reservation::class);
     }
+
+    /**
+     * Avis laissés sur cette prestation.
+     */
+    public function avis(): HasMany
+    {
+        return $this->hasMany(Avis::class);
+    }
+
+    /**
+     * Note moyenne (1 à 5), arrondie à une décimale, ou null si aucun avis.
+     */
+    public function noteMoyenne(): ?float
+    {
+        // Utilise la relation déjà chargée si disponible, sinon interroge la base.
+        $moyenne = $this->relationLoaded('avis')
+            ? $this->avis->avg('note')
+            : $this->avis()->avg('note');
+
+        return $moyenne !== null ? round((float) $moyenne, 1) : null;
+    }
+
+    /**
+     * Nombre total d'avis.
+     */
+    public function nombreAvis(): int
+    {
+        return $this->relationLoaded('avis')
+            ? $this->avis->count()
+            : $this->avis()->count();
+    }
 }

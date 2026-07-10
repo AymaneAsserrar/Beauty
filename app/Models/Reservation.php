@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Reservation extends Model
 {
@@ -44,6 +45,11 @@ class Reservation extends Model
         return $this->belongsTo(Prestation::class);
     }
 
+    public function avis(): HasOne
+    {
+        return $this->hasOne(Avis::class);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | Helpers de statut
@@ -55,6 +61,15 @@ class Reservation extends Model
         // Annulable tant qu'elle n'est pas déjà annulée/terminée et qu'elle est à venir.
         return in_array($this->statut, ['en_attente', 'confirmee'])
             && $this->date_heure->isFuture();
+    }
+
+    /**
+     * Le client peut laisser un avis si la prestation est terminée
+     * et qu'aucun avis n'a encore été déposé.
+     */
+    public function estNotable(): bool
+    {
+        return $this->statut === 'terminee' && $this->avis === null;
     }
 
     /**

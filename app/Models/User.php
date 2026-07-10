@@ -93,4 +93,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Reservation::class, 'prestataire_id');
     }
+
+    /**
+     * Avis déposés par cet utilisateur en tant que client.
+     */
+    public function avis(): HasMany
+    {
+        return $this->hasMany(Avis::class, 'client_id');
+    }
 }
