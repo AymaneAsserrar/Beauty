@@ -17,7 +17,8 @@ Plateforme web de réservation de prestations de beauté en ligne, développée 
 9. [Guide d'utilisation](#guide-dutilisation)
 10. [Architecture du code](#architecture-du-code)
 11. [Base de données](#base-de-données)
-12. [Dépannage](#dépannage)
+12. [Tests et validation](#tests-et-validation)
+13. [Dépannage](#dépannage)
 
 ---
 
@@ -307,6 +308,16 @@ La commande suivante supprime toutes les données et recrée la base à partir d
 ```bash
 php artisan migrate:fresh --seed
 ```
+
+---
+
+## Tests et validation
+
+La validation de la plateforme repose sur une stratégie de test à plusieurs niveaux. Des tests manuels ont permis de vérifier, page par page, la cohérence entre les maquettes, le cahier des charges et le comportement réel de l'application, en particulier sur les parcours critiques que sont l'inscription, la réservation et le dépôt d'avis.
+
+Des scénarios de test ciblés ont été définis pour les cas limites identifiés dès la conception du diagramme de séquence : tentative de réservation sur un créneau déjà passé, tentative de réservation sur un créneau venant d'être pris par une autre cliente, ou encore tentative de dépôt d'un second avis sur une même réservation. Ces scénarios permettent de vérifier que les contraintes définies au niveau de la base de données (unicité, clés étrangères) sont correctement doublées par des contrôles applicatifs, offrant ainsi une double sécurité contre les incohérences de données.
+
+À terme, ces vérifications manuelles ont vocation à être complétées par des tests automatisés écrits avec PHPUnit, l'outil de test intégré à Laravel, afin de garantir la non-régression du comportement de l'application au fil des évolutions futures.
 
 ---
 
