@@ -5,7 +5,7 @@
 
     <div class="text-center mt-4 mb-8">
         <h1 class="font-serif text-4xl font-bold">Réserver votre rendez-vous</h1>
-        <p class="text-ninich-muted mt-2">Complétez les étapes ci-dessous pour confirmer votre créneau.</p>
+        <p class="text-ninich-muted mt-2">Complétez les étapes ci-desuus pour confirmer votre créneau.</p>
     </div>
 
     @php $prestataireChoisi = $this->prestataires->firstWhere('id', (int) $prestataire_id); @endphp
